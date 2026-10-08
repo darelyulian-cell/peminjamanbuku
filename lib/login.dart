@@ -1,0 +1,98 @@
+import 'package:flutter/material.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController inputNama = TextEditingController();
+  TextEditingController inputPassword = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("News App"),
+        backgroundColor: Color.fromARGB(0, 50, 145, 145),
+      ),
+
+      backgroundColor: Color.fromARGB(245, 237, 240, 238),
+
+      body: Column(
+        children: [
+          Center(
+            child: Image(
+              image: AssetImage('assets/icon.png'),
+              width: 100,
+              height: 100,
+            ),
+          ),
+
+          Center(
+            child: Container(
+              width: 400,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  fillColor: const Color.fromARGB(255, 216, 206, 163),
+                  hintText: 'Masukkan Username',
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                  ),
+                ),
+
+                controller: inputNama,
+
+                onFieldSubmitted: (values) {
+                  inputNama.text = values;
+                },
+              ),
+            ),
+          ),
+
+          Padding(padding: EdgeInsets.all(16)),
+
+          Container(
+            width: 400,
+            child: TextFormField(
+              decoration: InputDecoration(
+                fillColor: const Color.fromARGB(255, 216, 206, 163),
+                hintText: 'Masukkan Password',
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(40)),
+                ),
+              ),
+
+              controller: inputPassword,
+
+              onFieldSubmitted: (values) {
+                inputPassword.text = values;
+              },
+            ),
+          ),
+
+          Padding(padding: EdgeInsets.all(16)),
+
+          ElevatedButton(
+            child: Text("Login"),
+            onPressed: () {
+              if (inputNama.text.isEmpty || inputPassword.text.isEmpty) {
+                return;
+              }
+
+              // Username dan password benar
+
+              if (inputNama.text == "admin" && inputPassword.text == "12345") {
+                Navigator.pushReplacementNamed(context, '/home');
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
